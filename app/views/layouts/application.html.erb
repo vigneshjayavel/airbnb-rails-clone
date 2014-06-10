@@ -3,14 +3,18 @@
 <head>
 	<title><%= h(yield(:title) || "Untitled") %></title>
 	<%= stylesheet_link_tag "application" %>
+	<%= stylesheet_link_tag "bootstrap" %>
+	<%= javascript_include_tag "bootstrap" %>
 	<%= yield(:head) %>
 </head>
 <body>
 	<div id="container">
 
 		<div id="user_nav">
+			Freshbnb 
+			<%= text_field_tag :search, params[:search], :placeholder => "Where are you going?" %>
 			<% if current_user %>
-				<%= link_to "My Profile", account_path %> |
+				<%= link_to current_user.name, account_path %> |
 				<%= link_to "Edit Profile", edit_account_path %> |
 				<%= link_to "Logout", logout_path %>
 			<% else %>
