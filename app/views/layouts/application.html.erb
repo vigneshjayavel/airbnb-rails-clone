@@ -4,32 +4,64 @@
 	<title><%= h(yield(:title) || "Untitled") %></title>
 	<%= stylesheet_link_tag "application" %>
 	<%= stylesheet_link_tag "bootstrap" %>
+	<%= javascript_include_tag "jquery-2.1.1" %>
 	<%= javascript_include_tag "bootstrap" %>
 	<%= yield(:head) %>
 </head>
 <body>
-	<div id="container">
-
-		<div id="user_nav">
-			Freshbnb 
-			<%= text_field_tag :search, params[:search], :placeholder => "Where are you going?" %>
-			<% if current_user %>
-				<%= link_to current_user.name, account_path %> |
-				<%= link_to "Edit Profile", edit_account_path %> |
-				<%= link_to "Logout", logout_path %>
-			<% else %>
-				<%= link_to "Register", new_user_path %> | 
-				<%= link_to "Login", login_path %>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+      
+    <div class="navbar-inner">
+      <div class="container">
+        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="brand" href="#">Freshbnb</a>
+        <div class="nav-collapse collapse">
+        	<div class="col-sm-3 col-md-3 pull-left">
+		        <form class="navbar-form" role="search">
+			        <div class="input-group">
+			            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+		        </div>
+		        </form>
+	        </div>
+          <ul class="nav">
+            <% if current_user %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.name %><b class="caret"></b></a>
+              <ul class="dropdown-menu">
+              	<li><a href="#">Your Listings</a></li>
+                <li><a href="#">Your Reservations</a></li>
+                <li class="divider"></li>
+								<li><%= link_to "Account", account_path %></li>
+								<li><%= link_to "Edit Profile", edit_account_path %></li>
+								<li><%= link_to "Logout", logout_path %></li>
+              </ul>
+            </li>
+						<% else %>
+						<li><%= link_to "Register", new_user_path %></li>
+						<li><%= link_to "Login", login_path %></li>
+						<% end %>
+						<li><a href="#">List Your Space</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+ 
+		<div class="container">
+			<h1>Freshbnb</h1>
+			<% flash.each do |name, msg| %>
+				<% content_tag(:div,msg,:id=> "flash_#{name}") %>
 			<% end %>
-		</div>
+			<%= yield %>
+			<footer>
+				<p>&copy; Freshbnb 2013</p>
+			</footer>
+		</div> <!--/.container-->
 
-		<% flash.each do |name, msg| %>
-			<% content_tag(:div,msg,:id=> "flash_#{name}") %>
-		<% end %>
 
-
-		<%= yield %>
-	</div>
 </body>
 
 </html>
