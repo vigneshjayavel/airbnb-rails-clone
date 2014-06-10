@@ -1,0 +1,13 @@
+<p>
+  <b>Name:</b>
+  <%=h @listing.name %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%=h @listing.address %>
+</p>
+
+
+<%= link_to 'Edit', edit_listing_path(@listing) %> |
+<%= link_to 'Back', listings_path %>

@@ -1,0 +1,20 @@
+<h1>Editing listing</h1>
+
+<% form_for(@listing) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @listing %> |
+<%= link_to 'Back', listings_path %>
