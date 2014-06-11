@@ -4,4 +4,5 @@ class User < ActiveRecord::Base
 	end
 
 	has_many :listings, :dependent => :destroy
+	has_many :reservations, :dependent => :destroy
 end
