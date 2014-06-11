@@ -2,9 +2,10 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.xml
   def index
-    # @listings = Listing.not_belonging_to_current_user
+    @listings = Listing.not_belonging_to_current_user(current_user.id)
 
-    @listings = Listing.all(:conditions => ["user_id != ?", current_user.id])
+    Rails.logger.debug(@listings.inspect)
+    # @listings = Listing.all(:conditions => ["user_id != ?", current_user.id])
 
     respond_to do |format|
       format.html # index.html.erb
