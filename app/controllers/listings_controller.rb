@@ -41,6 +41,7 @@ class ListingsController < ApplicationController
   # POST /listings.xml
   def create
     @listing = Listing.new(params[:listing])
+    @listing.user_id = current_user.id
 
     respond_to do |format|
       if @listing.save
