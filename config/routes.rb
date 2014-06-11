@@ -51,11 +51,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :member => { :listings => :get }
 
   map.resources :listings
-
+  map.resources :reservations
 
   map.register '/register', :controller => 'users', :action => 'new'
   map.login '/login', :controller => 'user_sessions', :action => 'new'
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'
-  map.users 'users', :controller => 'users', :action => 'index'
+  map.users '/users', :controller => 'users', :action => 'index'
 
 end

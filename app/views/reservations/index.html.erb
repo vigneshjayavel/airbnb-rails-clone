@@ -1,0 +1,25 @@
+You have <%= @reservations.count %> reservations
+<table>
+	<tr>
+		<th>Listing Name</th>
+		<th>Listing Address</th>
+		<th>Guests count</th>
+		<th>Reserved on</th>
+	</tr>
+
+<% @reservations.each do |reservation| %>
+  <tr>
+    <td><%=h reservation.listing_id %></td>
+    <td><%=h reservation.listing_id %></td>
+    <td><%=h reservation.guests_count %></td>
+    <td><%=h reservation.created_at %></td>
+    <td><%= link_to 'Show', reservation %></td>
+    <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
+    <td><%= link_to 'Destroy', reservation, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Reservation', new_reservation_path %>
