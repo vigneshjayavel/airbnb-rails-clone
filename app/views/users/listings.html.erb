@@ -1,4 +1,9 @@
-<h1>Listings of <%= current_user.name%></h1>
+<h1>Listings of <%= @user.name%></h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+  </tr>
 <% @listings.each do |listing| %>
   <tr>
     <td><%=h listing.name %></td>
@@ -10,3 +15,4 @@
     <% end %>
   </tr>
 <% end %>
+</table>

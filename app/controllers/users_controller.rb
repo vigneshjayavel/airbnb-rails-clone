@@ -17,9 +17,9 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find(params[:id]) || @current_user
+    @user =  @current_user
     @listings = @user.listings
-    @title = "listings by #{@user.name}" 
+    @title = "Welcome #{@user.name}. This is your profile." 
   end
 
   def edit
@@ -37,6 +37,7 @@ class UsersController < ApplicationController
   end
 
   def listings
-    @listings = current_user.listings
+    @user = User.find(params[:id])
+    @listings = @user.listings
   end
 end
