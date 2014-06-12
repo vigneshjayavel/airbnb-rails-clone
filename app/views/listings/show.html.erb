@@ -8,6 +8,8 @@
   <%=h @listing.address %>
 </p>
 
-
+<% if @listing.user_id == current_user.id %>
 <%= link_to 'Edit', edit_listing_path(@listing) %> |
-<%= link_to 'Back', listings_path %>
+<% else %>
+<%= link_to 'Book', "#" %>
+<% end %>

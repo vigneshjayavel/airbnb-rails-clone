@@ -46,7 +46,7 @@ ActionController::Routing::Routes.draw do |map|
   map.home 'home', :controller => "pages", :action => "index"
 
   map.resource :user_session
-  map.root :controller => "user_sessions", :action => "new" # optional, this just sets the root route
+  map.root :controller => "pages", :action => "index" # optional, this just sets the root route
   map.resource :account, :controller => "users"
   map.resources :users, :member => { :listings => :get }
 
