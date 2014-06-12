@@ -83,4 +83,10 @@ class ListingsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def reserve
+    @listing = Listing.find(params[:id])
+    @reservation = @listing.reservations.new
+  end
+
 end

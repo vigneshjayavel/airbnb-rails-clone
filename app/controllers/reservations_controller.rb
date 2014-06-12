@@ -8,17 +8,6 @@ class ReservationsController < ApplicationController
 		@reservation = Reservation.find(params[:id])
 	end
 
-	
-  # GET /reservations/new
-  # GET /reservations/new.xml
-  def new
-    @reservation = Reservation.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @reservation }
-    end
-  end
 
   # GET /reservations/1/edit
   def edit

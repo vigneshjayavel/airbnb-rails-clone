@@ -50,7 +50,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :account, :controller => "users"
   map.resources :users, :member => { :listings => :get }
 
-  map.resources :listings
+  map.resources :listings, :member => { :reserve => :get }
   map.resources :reservations
 
   map.register '/register', :controller => 'users', :action => 'new'
