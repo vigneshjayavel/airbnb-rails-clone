@@ -25,11 +25,11 @@
   </p>
   <p>
     <%= f.label "Home Type" %><br />
-    <%= f.text_field :home_type %>
+    <%= f.select :home_type, get_home_types.map {|value| [value,value]} %>
   </p>
   <p>
     <%= f.label "Room Type" %><br />
-    <%= f.text_field :room_type %>
+    <%= f.select :room_type, get_room_types.map {|value| [value,value]} %>
   </p>
   <p>
     <%= f.label "Notice Period" %><br />
