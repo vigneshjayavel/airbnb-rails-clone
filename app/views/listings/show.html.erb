@@ -39,7 +39,7 @@
 </p>
 
 <% if @listing.user_id == current_user.id %>
-<%= link_to 'Edit', edit_listing_path(@listing) %> |
+<%= link_to 'Edit', edit_listing_path(@listing) %>
 <% else %>
 <%= link_to 'Reserve', reserve_listing_path(@listing) %>
 <% end %>
