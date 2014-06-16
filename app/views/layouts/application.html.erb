@@ -9,8 +9,7 @@
 	<%= yield(:head) %>
 </head>
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
-      
+	<div class="navbar navbar-inverse navbar-fixed-top">   
     <div class="navbar-inner">
       <div class="container">
         <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -24,7 +23,7 @@
 		        <form class="navbar-form" role="search">
 			        <div class="input-group">
 			            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
-		        </div>
+		        	</div>
 		        </form>
 	        </div>
           <ul class="nav">
@@ -48,19 +47,19 @@
 						<li><%= link_to "List Your Space", new_listing_path %></li>
           </ul>
         </div><!--/.nav-collapse -->
-      </div>
-    </div>
- 
-		<div class="container">
-			<h1>Freshbnb</h1>
-			<% flash.each do |name, msg| %>
-				<%= content_tag(:div,msg,:id=> "flash_#{name}") %>
-			<% end %>
-			<%= yield %>
-			<footer>
-				<p>&copy; Freshbnb 2013</p>
-			</footer>
-		</div> <!--/.container-->
+      </div><!-- /.container -->
+    </div><!-- /.navabar-inner -->
+	</div> <!-- /.navbar -->
+
+	<div id="page" class="container">
+		<% flash.each do |name, msg| %>
+			<%= content_tag(:div,msg,:id=> "flash_#{name}") %>
+		<% end %>
+		<%= yield %>
+		<footer>
+			<p>&copy; Freshbnb 2013</p>
+		</footer>
+	</div> <!--/.container-->
 
 
 </body>
