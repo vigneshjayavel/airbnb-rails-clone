@@ -18,7 +18,8 @@ class ReservationsController < ApplicationController
     if @reservation.save
       redirect_to(@reservation, :notice => 'Reservation was successfully created.') 
     else
-      render :action => "new" 
+      flash[:notice] = @reservation.errors.full_messages.to_sentence
+      redirect_to(reserve_listing_url params[:reservation][:listing_id])
     end
 
   end
