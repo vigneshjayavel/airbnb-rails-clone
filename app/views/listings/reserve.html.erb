@@ -8,6 +8,14 @@
     <%= f.text_field :guests_count %>
   </p>
   <p>
+    <%= f.label "Check In" %><br />
+    <%= f.date_select :check_in %>
+  </p>
+  <p>
+    <%= f.label "Check Out" %><br />
+    <%= f.date_select :check_out %>
+  </p>
+  <p>
     <%= f.submit 'Create' %>
   </p>
 <% end %>

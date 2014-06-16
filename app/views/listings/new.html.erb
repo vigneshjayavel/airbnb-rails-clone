@@ -4,13 +4,38 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :name %><br />
+    <%= f.label "Name" %><br />
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :address %><br />
+    <%= f.label "Address" %><br />
     <%= f.text_field :address %>
   </p>
+  <p>
+    <%= f.label "Maximum Guests" %><br />
+    <%= f.text_field :maximum_guests %>
+  </p>
+  <p>
+    <%= f.label "Available From" %><br />
+    <%= f.date_select :availability_from %>
+  </p>
+  <p>
+    <%= f.label "Available Till" %><br />
+    <%= f.date_select :availability_to %>
+  </p>
+  <p>
+    <%= f.label "Home Type" %><br />
+    <%= f.text_field :home_type %>
+  </p>
+  <p>
+    <%= f.label "Room Type" %><br />
+    <%= f.text_field :room_type %>
+  </p>
+  <p>
+    <%= f.label "Notice Period" %><br />
+    <%= f.text_field :notice_period %>
+  </p>
+
   <p>
     <%= f.submit 'Create' %>
   </p>

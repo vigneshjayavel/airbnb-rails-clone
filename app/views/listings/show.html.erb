@@ -8,6 +8,36 @@
   <%=h @listing.address %>
 </p>
 
+<p>
+  <b>Available From:</b>
+  <%=h @listing.availability_from %>
+</p>
+
+<p>
+  <b>Available Till:</b>
+  <%=h @listing.availability_to %>
+</p>
+
+<p>
+  <b>Notice Period:</b>
+  <%=h @listing.notice_period %>
+</p>
+
+<p>
+  <b>Maximum Guests:</b>
+  <%=h @listing.maximum_guests %>
+</p>
+
+<p>
+  <b>Home Type:</b>
+  <%=h @listing.home_type %>
+</p>
+
+<p>
+  <b>Room Type:</b>
+  <%=h @listing.room_type %>
+</p>
+
 <% if @listing.user_id == current_user.id %>
 <%= link_to 'Edit', edit_listing_path(@listing) %> |
 <% else %>

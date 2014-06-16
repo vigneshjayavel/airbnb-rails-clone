@@ -1,1 +1,24 @@
-details for reservation with id = <%= @reservation.id %>
+
+<p>
+  <b>Listing ID:</b>
+  <%=h @reservation.listing_id %>
+</p>
+
+<p>
+  <b>Check In:</b>
+  <%=h @reservation.check_in %>
+</p>
+
+<p>
+  <b>Check Out:</b>
+  <%=h @reservation.check_out %>
+</p>
+
+<p>
+  <b>Guests Count:</b>
+  <%=h @reservation.guests_count %>
+</p>
+
+<% if @reservation.user_id == current_user.id %>
+<%= link_to 'Edit', edit_reservation_path(@reservation) %>
+<% end %>
