@@ -18,7 +18,7 @@ class ReservationsController < ApplicationController
   # POST /reservations.xml
   def create
     @reservation = current_user.reservations.new(params[:reservation])
-
+    
     respond_to do |format|
       if @reservation.save
         format.html { redirect_to(@reservation, :notice => 'Reservation was successfully created.') }
