@@ -18,6 +18,9 @@ class ReservationsController < ApplicationController
     if Date.today > listing.availability_from && Date.today > listing.availability_to
       flash[:notice] = "The listing's availability has expired"
       redirect_to(reserve_listing_url params[:reservation][:listing_id])
+    elsif listing.availability_from > @reservation.check_in || listing.availability_to < @reservation.check_out
+      flash[:notice] = "You can reserve this listing only for the period #{listing.availability_from} - #{listing.availability_to}"
+      redirect_to(reserve_listing_url params[:reservation][:listing_id])  
     else
       if @reservation.save
         redirect_to(@reservation, :notice => 'Reservation was successfully created.') 
