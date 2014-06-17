@@ -18,7 +18,7 @@ class Listing < ActiveRecord::Base
   :default_url => "/images/default_:style.png"
 
   # Validations
-  validates_presence_of :name, :address
+  validates_presence_of :name, :address, :price
   validate :validate_availability
 
   #paperclip validation
