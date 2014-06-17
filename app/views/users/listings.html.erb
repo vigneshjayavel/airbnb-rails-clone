@@ -6,6 +6,7 @@
   </tr>
 <% @listings.each do |listing| %>
   <tr>
+    <td><%= image_tag listing.snap.url(:thumb) %></td>
     <td><%=h listing.name %></td>
     <td><%=h listing.address %></td>
     <td><%= link_to 'Show', listing %></td>

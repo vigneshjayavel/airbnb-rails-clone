@@ -10,14 +10,19 @@ class Listing < ActiveRecord::Base
   has_many :reservations
 
   #paperclip gem configs
-  has_attached_file :snap, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+  has_attached_file :snap, 
+  :styles => { 
+    :medium => "300x300>", 
+    :thumb => "100x100>"
+  }, 
+  :default_url => "/images/default_:style.png"
 
   # Validations
   validates_presence_of :name, :address
   validate :validate_availability
 
   #paperclip validation
-  # validates_attachment_presence
+  validates_attachment_presence :snap
 
   private
   def validate_availability

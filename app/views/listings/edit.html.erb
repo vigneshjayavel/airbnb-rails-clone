@@ -1,6 +1,6 @@
 <h1>Editing listing</h1>
 
-<% form_for(@listing) do |f| %>
+<% form_for :listing, @listing, :url => listings_path, :html => { :multipart => true} do |f| %>
   <%= f.error_messages %>
  <p>
     <%= f.label "Name" %><br />
@@ -34,7 +34,13 @@
     <%= f.label "Notice Period" %><br />
     <%= f.text_field :notice_period %>
   </p>
-
+  <p>
+    <%= image_tag @listing.snap.url(:medium) %>
+  </p>
+  <p>
+    <%= f.label "Room Snap" %>
+    <%= f.file_field :snap %>
+  </p>
   <p>
     <%= f.submit 'Update' %>
   </p>
