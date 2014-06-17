@@ -1,19 +1,9 @@
 <h1>Listings of <%= @user.name%></h1>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Address</th>
-  </tr>
-<% @listings.each do |listing| %>
-  <tr>
-    <td><%= image_tag listing.snap.url(:thumb) %></td>
-    <td><%=h listing.name %></td>
-    <td><%=h listing.address %></td>
-    <td><%= link_to 'Show', listing %></td>
-    <% if current_user_is_listing_owner? listing %>
-      <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
-      <td><%= link_to 'Destroy', listing, :confirm => 'Are you sure?', :method => :delete %></td>
-    <% end %>
-  </tr>
-<% end %>
-</table>
+<div class="row-fluid">
+  <ul class="thumbnails">
+      <%= render @listings%>
+  </ul>
+</div>
+
+
+<%= link_to 'New listing', new_listing_path %>

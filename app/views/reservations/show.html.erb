@@ -1,24 +1,29 @@
 
-<p>
-  <b>Listing ID:</b>
-  <%=h @reservation.listing_id %>
-</p>
+<div class="span5">
+	<%= render Listing.find(@reservation.listing_id) %>
+</div>
+<div class="span7">
+	<p>
+	  <b>Listing ID:</b>
+	  <%=h @reservation.listing_id %>
+	</p>
 
-<p>
-  <b>Check In:</b>
-  <%=h @reservation.check_in %>
-</p>
+	<p>
+	  <b>Check In:</b>
+	  <%=h @reservation.check_in %>
+	</p>
 
-<p>
-  <b>Check Out:</b>
-  <%=h @reservation.check_out %>
-</p>
+	<p>
+	  <b>Check Out:</b>
+	  <%=h @reservation.check_out %>
+	</p>
 
-<p>
-  <b>Guests Count:</b>
-  <%=h @reservation.guests_count %>
-</p>
+	<p>
+	  <b>Guests Count:</b>
+	  <%=h @reservation.guests_count %>
+	</p>
 
-<% if @reservation.user_id == current_user.id %>
-<%= link_to 'Edit', edit_reservation_path(@reservation) %>
-<% end %>
+	<% if @reservation.user_id == current_user.id %>
+	<%= link_to 'Edit', edit_reservation_path(@reservation) %>
+	<% end %>
+</div>

@@ -1,28 +1,3 @@
 <h1>Editing reservation</h1>
 
-<% form_for(@reservation) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label "Listing Id :" %><br />
-    <%= f.text_field :listing_id %>
-  </p>
-  <p>
-    <%= f.label "Guests count :" %><br />
-    <%= f.text_field :guests_count %>
-  </p>
-  <p>
-    <%= f.label "Check In" %><br />
-    <%= f.date_select :check_in %>
-  </p>
-  <p>
-    <%= f.label "Check Out" %><br />
-    <%= f.date_select :check_out %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @reservation %> |
-<%= link_to 'Back', reservations_path %>
+<%= render(:partial => "reservation_form_element", :locals => {:reservation => @reservation}) %>

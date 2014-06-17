@@ -1,0 +1,36 @@
+<li class="span3">
+  <div class="thumbnail" style="padding: 0">
+    <div style="padding:4px">
+      <%= image_tag listing.snap.url(:medium), :size=>"300x200" %>
+    </div>
+    <div class="caption">
+      <h2><%= link_to(listing.name, listing_path(listing)) %></h2>
+      <p><%=h listing.address %></p>
+      <p><i class="icon icon-map-marker"></i> Place, Country</p>
+    </div>
+    <div class="modal-footer" style="text-align: left">
+      <div class="row-fluid">
+        <div class="span12">
+          <b>
+            <%= l listing.availability_from, :format => :long %> - 
+            <%= l listing.availability_to, :format => :long%> 
+          </b><br/>
+          <small>Availability</small>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <div class="span4"><b><%= listing.price %></b><br/><small>Price</small></div>
+        <div class="span4"><b><%= listing.home_type %></b><br/><small>Homt Type</small></div>
+        <div class="span4"><b><%= listing.room_type %></b><br/><small>Room Type</small></div>
+      </div>
+      <div>
+        <% if current_user_is_listing_owner? listing %>
+          <%= link_to 'Edit', edit_listing_path(listing) %>
+          <%= link_to 'Destroy', listing, :confirm => 'Are you sure?', :method => :delete %>
+        <% else %>
+          <%= link_to 'Reserve', reserve_listing_path(listing) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</li>

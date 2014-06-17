@@ -1,0 +1,36 @@
+<% form_for((@reservation), :html => { :class => ""} )do |f| %>
+  <% if f.error_messages.length %>
+  	<%= content_tag("span", f.error_messages, :class => "alert alert-block alert-error fade in") %>
+  <% end -%>
+  <fieldset>
+  	<div class="control-group">
+	  	<%= f.label :listing_id, "Listing Id :", :class => "control-label" %>
+	  	<div class="controls">
+	  		<%= f.text_field :listing_id, :class => "input-xlarge" %>
+	  	</div>
+	  </div>
+	  <div class="control-group">
+	  	<%= f.label :guests_count, "Guests count  :", :class => "control-label" %>
+	  	<div class="controls">
+	  		<%= f.text_field :guests_count, :class => "input-xlarge" %>
+	  	</div>
+	  </div>
+	  <div class="control-group">
+	  	<%= f.label :check_in, "Check In :", :class => "control-label" %>
+	  	<div class="controls">
+	  		<%= f.date_select :check_in, :class => "input-xlarge" %>
+	  	</div>
+	  </div>
+	  <div class="control-group">
+	  	<%= f.label :check_out, "Check Out :", :class => "control-label" %>
+	  	<div class="controls">
+	  		<%= f.date_select :check_out, :class => "input-xlarge" %>
+	  	</div>
+	  </div>
+	  <div class="control-group">
+	  	<div class="controls">
+	  		<%= f.submit 'Update', :class => "btn btn-success" %>
+	  	</div>
+	  </div>
+  </fieldset>
+<% end %>
