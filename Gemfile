@@ -8,3 +8,5 @@ gem "mysql2", "~> 0.2.7", :platforms => :ruby_19
 gem "faker", "0.3.1"
 
 gem "authlogic", '2.1.6'
+
+gem "paperclip", "~> 2.0"

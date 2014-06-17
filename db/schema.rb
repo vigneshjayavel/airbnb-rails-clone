@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140613120619) do
+ActiveRecord::Schema.define(:version => 20140617062456) do
 
   create_table "listings", :force => true do |t|
     t.string   "name"
@@ -23,6 +23,10 @@ ActiveRecord::Schema.define(:version => 20140613120619) do
     t.integer  "maximum_guests",    :default => 1,             :null => false
     t.string   "home_type",         :default => "house",       :null => false
     t.string   "room_type",         :default => "entire home", :null => false
+    t.string   "snap_file_name"
+    t.string   "snap_content_type"
+    t.integer  "snap_file_size"
+    t.datetime "snap_updated_at"
   end
 
   create_table "reservations", :force => true do |t|

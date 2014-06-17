@@ -1,7 +1,11 @@
 class ListingsController < ApplicationController
 
   def index
-    @listings = Listing.not_belonging_to_current_user(current_user.id)
+    if current_user
+      @listings = Listing.not_belonging_to_current_user(current_user.id)
+    else
+      @listings = Listing.all
+    end
   end
 
   def show

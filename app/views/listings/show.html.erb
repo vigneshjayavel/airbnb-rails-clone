@@ -9,6 +9,12 @@
 </p>
 
 <p>
+  <%= image_tag @listing.snap.url %>
+  <%= image_tag @listing.snap.url(:medium) %>
+  <%= image_tag @listing.snap.url(:thumb) %>
+</p>
+
+<p>
   <b>Available From:</b>
   <%=h @listing.availability_from %>
 </p>
