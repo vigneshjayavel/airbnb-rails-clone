@@ -13,32 +13,15 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @reservation = current_user.reservations.new(params[:reservation])
-    listing = Listing.find(params[:reservation][:listing_id])
-    if Date.today > listing.availability_from && Date.today > listing.availability_to
-      message = "The listing's availability has expired"
-      path = reserve_listing_url params[:reservation][:listing_id]
-    elsif listing.availability_from > @reservation.check_in || listing.availability_to < @reservation.check_out
-      message = "You can reserve this listing only for the period #{listing.availability_from} - #{listing.availability_to}"
-      path = reserve_listing_url params[:reservation][:listing_id]
-    else
-      if @reservation.save
-        message = "Reservation was successfully created."
-        path = @reservation  
-      else
-        message = @reservation.errors.full_messages.to_sentence
-        path = reserve_listing_url params[:reservation][:listing_id]
-      end
-    end
-    set_flash_notice message
-    redirect_to path
-
+    result = Listing.validate_and_create params, current_user
+    set_flash_notice result[:message]
+    redirect_to result[:path]
   end
 
   def update
     reservation_from_id
     if @reservation.update_attributes(params[:reservation])
-       set_flash_notice 'Reservation was successfully updated.'
+       set_flash_notice "Reservation was successfully updated."
        redirect_to(@reservation)
     else
       render :action => "edit"

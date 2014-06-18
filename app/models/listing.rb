@@ -48,6 +48,29 @@ class Listing < ActiveRecord::Base
     end
   end
 
+  def self.validate_and_create(params, current_user)
+    reservation = current_user.reservations.new(params[:reservation])
+    listing = Listing.find(params[:reservation][:listing_id])
+    if Date.today > listing.availability_from && Date.today > listing.availability_to
+      message = "The listing's availability has expired"
+      path = reserve_listing_url params[:reservation][:listing_id]
+    elsif listing.availability_from > @reservation.check_in || listing.availability_to < @reservation.check_out
+      message = "You can reserve this listing only for the period #{listing.availability_from} - #{listing.availability_to}"
+      path = reserve_listing_url params[:reservation][:listing_id]
+    else
+      if @reservation.save
+        message = "Reservation was successfully created."
+        path = @reservation  
+      else
+        message = @reservation.errors.full_messages.to_sentence
+        path = reserve_listing_url params[:reservation][:listing_id]
+      end
+    end
+    result[:message] = message
+    result[:path] = path
+    return result
+  end
+
   private
   def validate_availability
   	errors.add("Availability ") if self.availability_from >= self.availability_to

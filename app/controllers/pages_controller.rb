@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-
+	before_filter :require_user, :only => [:index, :search]
 	def index
 		
 	end

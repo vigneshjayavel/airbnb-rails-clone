@@ -1,5 +1,5 @@
 class ListingsController < ApplicationController
-
+  before_filter :require_user, :only => [:index, :new]
   def index
     if current_user
       @listings = Listing.not_belonging_to_current_user(current_user.id)
