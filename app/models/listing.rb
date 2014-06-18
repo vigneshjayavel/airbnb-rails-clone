@@ -36,6 +36,18 @@ class Listing < ActiveRecord::Base
   #paperclip validation
   # validates_attachment_presence :snap
 
+  def self.get_listings_for_search_attr(search_attr, current_user)
+    if search_attr[:guests_count]!=nil && search_attr[:place]!=nil
+      check_in = "#{search_attr["check_in(1i)"]}-#{search_attr["check_in(2i)"]}-#{search_attr["check_in(3i)"]}"
+      check_out = "#{search_attr["check_out(1i)"]}-#{search_attr["check_out(2i)"]}-#{search_attr["check_out(3i)"]}"
+      Listing.not_belonging_to_current_user(current_user).apply_full_search_criteria(search_attr[:place], search_attr[:guests_count], check_in, check_out)
+    elsif search_attr[:place] != nil
+      Listing.not_belonging_to_current_user(current_user.id).apply_place_search_criteria(search_attr[:place])
+    else
+      Listing.not_belonging_to_current_user(current_user.id)
+    end
+  end
+
   private
   def validate_availability
   	errors.add("Availability ") if self.availability_from >= self.availability_to
