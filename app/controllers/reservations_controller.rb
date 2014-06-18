@@ -14,34 +14,24 @@ class ReservationsController < ApplicationController
 
   def create
     result = Reservation.validate_and_create params, current_user
-    set_flash_notice result[:message]
-    redirect_to result[:path]
+    flash_and_redirect result
   end
 
   def update
     reservation_from_id
-    if @reservation.update_attributes(params[:reservation])
-       set_flash_notice "Reservation was successfully updated."
-       redirect_to(@reservation)
-    else
-      render :action => "edit"
-    end
+    result = Reservation.validate_and_update params, @reservation
+    flash_and_redirect result
   end
 
   def destroy
     reservation_from_id
     result = Reservation.validate_and_destroy @reservation
-    set_flash_notice result[:message]
-    redirect_to result[:path]
+    flash_and_redirect result
   end
   
   private 
   def reservation_from_id
     @reservation = Reservation.find(params[:id])
   end 
-
-  def set_flash_notice(message)
-    flash[:notice] = message
-  end
 
 end

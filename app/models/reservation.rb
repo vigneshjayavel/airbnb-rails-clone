@@ -13,17 +13,17 @@ class Reservation < ActiveRecord::Base
     listing = Listing.find(params[:reservation][:listing_id])
     if Date.today > listing.availability_from && Date.today > listing.availability_to
       message = "The listing's availability has expired"
-      path = reserve_listing_url params[:reservation][:listing_id]
+      path = reserve_listing_path params[:reservation][:listing_id]
     elsif listing.availability_from > reservation.check_in || listing.availability_to < reservation.check_out
       message = "You can reserve this listing only for the period #{listing.availability_from} - #{listing.availability_to}"
-      path = reserve_listing_url params[:reservation][:listing_id]
+      path = reserve_listing_path params[:reservation][:listing_id]
     else
       if reservation.save
         message = "Reservation was successfully created."
         path = reservation  
       else
         message = reservation.errors.full_messages.to_sentence
-        path = reserve_listing_url params[:reservation][:listing_id]
+        path = reserve_listing_path params[:reservation][:listing_id]
       end
     end
     result = {
@@ -48,6 +48,20 @@ class Reservation < ActiveRecord::Base
     	:path => path
     }
     return result
+  end
+
+  def self.validate_and_update(params, reservation)
+    if reservation.update_attributes(params[:reservation])
+       message = "Reservation was successfully updated."
+       path = reservation
+    else
+      message = reservation.errors.full_messages.to_sentence
+      path = {:action => "edit"}
+    end
+    result = {
+      :message => message,
+      :path => path
+    }
   end
 
 	private

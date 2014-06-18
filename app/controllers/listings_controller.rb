@@ -34,7 +34,6 @@ class ListingsController < ApplicationController
   def destroy
     listing_from_id
     @listing.destroy
-
     redirect_to(listings_user_path(current_user.id))
   end
 
