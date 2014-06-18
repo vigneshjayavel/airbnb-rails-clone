@@ -7,6 +7,18 @@ class Listing < ActiveRecord::Base
     { :conditions => ["user_id != ?", current_user_id] }
   }
 
+  named_scope :apply_full_search_criteria, lambda { |place, guests_count, check_in, check_out| 
+    {
+      :conditions => ["place = ? and maximum_guests >= ? and availability_from <= ? and availability_to >= ? ", place, guests_count, check_in, check_out]
+    }
+  }
+
+  named_scope :apply_place_search_criteria, lambda { |place| 
+    {
+      :conditions => ["place = ?", place] 
+    }
+  }
+
   has_many :reservations,:dependent => :destroy
 
   #paperclip gem configs
