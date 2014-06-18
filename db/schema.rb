@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140617072545) do
+ActiveRecord::Schema.define(:version => 20140618061350) do
 
   create_table "listings", :force => true do |t|
     t.string   "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20140617072545) do
     t.integer  "snap_file_size"
     t.datetime "snap_updated_at"
     t.integer  "price",             :default => 10000,         :null => false
+    t.string   "place",                                        :null => false
   end
 
   create_table "reservations", :force => true do |t|

@@ -1,3 +1,5 @@
 <h1>Editing reservation</h1>
-
+<div class="span5">
+  <%= render Listing.find(@reservation.listing_id) %>
+</div>
 <%= render(:partial => "reservation_form_element", :locals => {:reservation => @reservation}) %>

@@ -22,7 +22,7 @@ class Listing < ActiveRecord::Base
   validate :validate_availability
 
   #paperclip validation
-  validates_attachment_presence :snap
+  # validates_attachment_presence :snap
 
   private
   def validate_availability

@@ -1,0 +1,13 @@
+<tr>
+    <td><%= h reservation.listing_id %></td>
+    <td>Chennai</td>
+    <td><%= l reservation.check_in, :format => :long %> - <%= l reservation.check_out, :format => :long %></td>
+    <td class="td-actions">
+        <% link_to(delete_reservation_path(reservation), :class => "btn btn-small btn-primary") do %>
+            <i class="btn-icon-only icon-close"></i>
+        <% end %>
+        <% link_to(reservation_path(reservation), :class => "btn btn-small") do %>
+            <i class="btn-icon-only icon-info-sign"></i>                                       
+        <% end %>
+    </td>
+</tr>

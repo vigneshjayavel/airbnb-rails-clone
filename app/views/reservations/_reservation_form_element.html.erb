@@ -1,14 +1,6 @@
 <% form_for((@reservation), :html => { :class => ""} )do |f| %>
-  <% if f.error_messages.length %>
-  	<%= content_tag("span", f.error_messages, :class => "alert alert-block alert-error fade in") %>
-  <% end -%>
+  <%= f.error_messages %>
   <fieldset>
-  	<div class="control-group">
-	  	<%= f.label :listing_id, "Listing Id :", :class => "control-label" %>
-	  	<div class="controls">
-	  		<%= f.text_field :listing_id, :class => "input-xlarge" %>
-	  	</div>
-	  </div>
 	  <div class="control-group">
 	  	<%= f.label :guests_count, "Guests count  :", :class => "control-label" %>
 	  	<div class="controls">

@@ -7,7 +7,10 @@
   <b>Address:</b>
   <%=h @listing.address %>
 </p>
-
+<p>
+  <b>Place:</b>
+  <%=h @listing.place %>
+</p>
 <p>
   <%= image_tag @listing.snap.url %>
   <%= image_tag @listing.snap.url(:medium) %>
@@ -52,4 +55,10 @@
 <%= link_to 'Edit', edit_listing_path(@listing) %>
 <% else %>
 <%= link_to 'Reserve', reserve_listing_path(@listing) %>
+<% end %>
+
+<% if @listing.user_id == current_user.id %>
+<% @listing.reservations.each do |reservation| %>
+  <%= render :partial => "reservation_listing_owner_table_template", :locals => {:reservation => reservation} %>
+<% end %>
 <% end %>

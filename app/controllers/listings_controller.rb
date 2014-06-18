@@ -44,7 +44,7 @@ class ListingsController < ApplicationController
     @listing = Listing.find(params[:id])
     @listing.destroy
 
-    redirect_to(listings_url)
+    redirect_to(listings_user_path(current_user.id))
   end
 
   def reserve

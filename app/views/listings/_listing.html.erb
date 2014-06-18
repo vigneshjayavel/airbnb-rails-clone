@@ -6,7 +6,7 @@
     <div class="caption">
       <h2><%= link_to(listing.name, listing_path(listing)) %></h2>
       <p><%=h listing.address %></p>
-      <p><i class="icon icon-map-marker"></i> Place, Country</p>
+      <p><i class="icon icon-map-marker"></i> <%=h listing.place %></p>
     </div>
     <div class="modal-footer" style="text-align: left">
       <div class="row-fluid">
