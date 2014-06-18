@@ -5,11 +5,11 @@ class ReservationsController < ApplicationController
 	end
 
 	def show
-		@reservation = Reservation.find(params[:id])
+    reservation_from_id
 	end
 
   def edit
-    @reservation = Reservation.find(params[:id])
+    reservation_from_id
   end
 
   def create
@@ -33,8 +33,7 @@ class ReservationsController < ApplicationController
   end
 
   def update
-    @reservation = Reservation.find(params[:id])
-
+    reservation_from_id
     if @reservation.update_attributes(params[:reservation])
       redirect_to(@reservation, :notice => 'Reservation was successfully updated.')
     else
@@ -44,7 +43,7 @@ class ReservationsController < ApplicationController
   end
 
   def destroy
-    @reservation = Reservation.find(params[:id])
+    reservation_from_id
     listing = Listing.find(@reservation.listing_id)
     if Date.today < @reservation.check_in + listing.notice_period 
       @reservation.destroy
@@ -53,5 +52,10 @@ class ReservationsController < ApplicationController
       redirect_to(@reservation, :notice => "You cannot cancel the reservation. Minimum notice period is #{listing.notice_period} days")
     end
   end
+  
+  private 
+  def reservation_from_id
+    @reservation = Reservation.find(params[:id])
+  end 
 
 end

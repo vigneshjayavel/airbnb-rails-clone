@@ -17,17 +17,17 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user =  @current_user
+    user_from_current_user
     @listings = @user.listings
     @title = "Welcome #{@user.name}. This is your profile." 
   end
 
   def edit
-    @user = @current_user
+    user_from_current_user
   end
   
   def update
-    @user = @current_user
+    user_from_current_user
     if @user.update_attributes(params[:user])
       flash[:notice] = "Account updated!"
       redirect_to account_url
@@ -37,7 +37,18 @@ class UsersController < ApplicationController
   end
 
   def listings
-    @user = User.find(params[:id])
+    user_from_id
     @listings = @user.listings
+  end
+
+
+  private
+  
+  def user_from_current_user
+    @user = @current_user
+  end
+
+  def user_from_id
+    @user = User.find(params[:id])
   end
 end

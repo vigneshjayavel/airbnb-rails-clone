@@ -9,7 +9,7 @@ class ListingsController < ApplicationController
   end
 
   def show
-    @listing = Listing.find(params[:id])
+    listing_from_id
   end
 
   def new
@@ -17,12 +17,11 @@ class ListingsController < ApplicationController
   end
 
   def edit
-    @listing = Listing.find(params[:id])
+    listing_from_id
   end
 
   def create
     @listing = current_user.listings.new(params[:listing])
-
     if @listing.save
       redirect_to(@listing, :notice => 'Listing was successfully created.') 
     else
@@ -31,8 +30,7 @@ class ListingsController < ApplicationController
   end
 
   def update
-    @listing = Listing.find(params[:id])
-
+    listing_from_id
     if @listing.update_attributes(params[:listing])
       redirect_to(@listing, :notice => 'Listing was successfully updated.')
     else
@@ -41,15 +39,19 @@ class ListingsController < ApplicationController
   end
 
   def destroy
-    @listing = Listing.find(params[:id])
+    listing_from_id
     @listing.destroy
 
     redirect_to(listings_user_path(current_user.id))
   end
 
   def reserve
-    @listing = Listing.find(params[:id])
+    listing_from_id
     @reservation = @listing.reservations.new
+  end
+
+  def listing_from_id
+    @listing = Listing.find(params[:id])
   end
 
 end
