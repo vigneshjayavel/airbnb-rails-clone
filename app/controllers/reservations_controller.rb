@@ -13,7 +13,7 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    result = Listing.validate_and_create params, current_user
+    result = Reservation.validate_and_create params, current_user
     set_flash_notice result[:message]
     redirect_to result[:path]
   end
@@ -26,19 +26,13 @@ class ReservationsController < ApplicationController
     else
       render :action => "edit"
     end
-    
   end
 
   def destroy
     reservation_from_id
-    listing = Listing.find(@reservation.listing_id)
-    if Date.today < @reservation.check_in + listing.notice_period 
-      @reservation.destroy
-      redirect_to(reservations_path)
-    else 
-      set_flash_notice "You cannot cancel the reservation. Minimum notice period is #{listing.notice_period} days"
-      redirect_to(@reservation)
-    end
+    result = Reservation.validate_and_destroy @reservation
+    set_flash_notice result[:message]
+    redirect_to result[:path]
   end
   
   private 

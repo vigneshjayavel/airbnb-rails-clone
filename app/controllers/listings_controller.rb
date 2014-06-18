@@ -21,21 +21,14 @@ class ListingsController < ApplicationController
   end
 
   def create
-    @listing = current_user.listings.new(params[:listing])
-    if @listing.save
-      redirect_to(@listing, :notice => 'Listing was successfully created.') 
-    else
-      render :action => "new"
-    end
+    result = Listing.validate_and_create params, current_user
+    process_result_from_model result
   end
 
   def update
     listing_from_id
-    if @listing.update_attributes(params[:listing])
-      redirect_to(@listing, :notice => 'Listing was successfully updated.')
-    else
-      render :action => "edit" 
-    end
+    result = Listing.validate_and_update params, @listing, current_user
+    process_result_from_model result
   end
 
   def destroy
@@ -50,8 +43,16 @@ class ListingsController < ApplicationController
     @reservation = @listing.reservations.new
   end
 
+  private
   def listing_from_id
     @listing = Listing.find(params[:id])
   end
 
+  def process_result_from_model result
+    if !result[:error]
+      flash_and_redirect result
+    else
+      flash_and_render_action result
+    end
+  end
 end

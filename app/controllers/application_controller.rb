@@ -48,4 +48,14 @@ class ApplicationController < ActionController::Base
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
   end
+
+  def flash_and_redirect(result)
+    flash[:notice] = result[:message]
+    redirect_to result[:path]
+  end
+
+  def flash_and_render_action(result)
+    flash[:notice] = result[:message]
+    render result[:path]
+  end
 end

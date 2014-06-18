@@ -49,25 +49,29 @@ class Listing < ActiveRecord::Base
   end
 
   def self.validate_and_create(params, current_user)
-    reservation = current_user.reservations.new(params[:reservation])
-    listing = Listing.find(params[:reservation][:listing_id])
-    if Date.today > listing.availability_from && Date.today > listing.availability_to
-      message = "The listing's availability has expired"
-      path = reserve_listing_url params[:reservation][:listing_id]
-    elsif listing.availability_from > @reservation.check_in || listing.availability_to < @reservation.check_out
-      message = "You can reserve this listing only for the period #{listing.availability_from} - #{listing.availability_to}"
-      path = reserve_listing_url params[:reservation][:listing_id]
+    listing = current_user.listings.new(params[:listing])
+    result = {}
+    if listing.save
+      result[:message] = "Listing was successfully created."
+      result[:path] = listing
     else
-      if @reservation.save
-        message = "Reservation was successfully created."
-        path = @reservation  
-      else
-        message = @reservation.errors.full_messages.to_sentence
-        path = reserve_listing_url params[:reservation][:listing_id]
-      end
+      result[:message] = listing.errors.full_messages.to_sentence
+      result[:path] = {:action => "new"}
+      result[:error] = true
     end
-    result[:message] = message
-    result[:path] = path
+    return result
+  end
+
+  def self.validate_and_update(params, listing, current_user)
+    result = {}
+    if listing.update_attributes(params[:listing])
+      result[:message] = 'Listing was successfully updated.'
+      result[:path] = listing
+    else
+      result[:message] = listing.errors.full_messages.to_sentence
+      result[:path] = {:action => "edit"}
+      result[:error] = true
+    end
     return result
   end
 
