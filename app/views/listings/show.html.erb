@@ -84,4 +84,8 @@
     </div> <!-- /widget-content -->
   </div> <!-- /widget -->
 </div>
+<% else %>
+<h3>Owner details</h3>
+<% @user = User.find(@listing.user_id) %>
+<%= render "users/user" %>
 <% end %>
