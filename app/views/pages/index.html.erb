@@ -1,0 +1,16 @@
+Search Freshbnb
+
+<% form_tag search_path, :method => 'get' do %>
+  <%= label :search, "Place" %><br />
+  <%= text_field :search, :place %><br />
+  <br />
+  <%= label :search, "Check In" %><br />
+  <%= date_select :search, :check_in %><br />
+  <br />
+  <%= label :search, "Check Out" %><br />
+  <%= date_select :search, :check_out %><br />
+  <br />
+  <%= label :search, "Guests count" %><br />
+  <%= text_field :search, :guests_count %><br />
+  <%= submit_tag "Search", :name=>nil %>
+<% end %>
