@@ -1,6 +1,7 @@
 
 <div class="span5">
-	<%= render Listing.find(@reservation.listing_id) %>
+	<% listing = Listing.find(@reservation.listing_id) %>
+	<%= render listing %>
 </div>
 <div>
 
@@ -19,7 +20,8 @@
 	  <%=h @reservation.guests_count %>
 	</p>
 
-	<% if @reservation.user_id == current_user.id %>
+	<% if @reservation.user_id == current_user.id or listing.user_id == current_user.id %>
+	<%= link_to 'Cancel reservation', listing, :confirm => 'Are you sure cancelling this reservation?', :method => :delete %>
 	<%= link_to 'Edit', edit_reservation_path(@reservation) %>
 	<% end %>
 </div>

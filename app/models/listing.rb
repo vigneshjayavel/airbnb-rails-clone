@@ -7,7 +7,7 @@ class Listing < ActiveRecord::Base
     { :conditions => ["user_id != ?", current_user_id] }
   }
 
-  has_many :reservations
+  has_many :reservations,:dependent => :destroy
 
   #paperclip gem configs
   has_attached_file :snap, 
