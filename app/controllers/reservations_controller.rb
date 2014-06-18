@@ -16,26 +16,30 @@ class ReservationsController < ApplicationController
     @reservation = current_user.reservations.new(params[:reservation])
     listing = Listing.find(params[:reservation][:listing_id])
     if Date.today > listing.availability_from && Date.today > listing.availability_to
-      flash[:notice] = "The listing's availability has expired"
-      redirect_to(reserve_listing_url params[:reservation][:listing_id])
+      message = "The listing's availability has expired"
+      path = reserve_listing_url params[:reservation][:listing_id]
     elsif listing.availability_from > @reservation.check_in || listing.availability_to < @reservation.check_out
-      flash[:notice] = "You can reserve this listing only for the period #{listing.availability_from} - #{listing.availability_to}"
-      redirect_to(reserve_listing_url params[:reservation][:listing_id])  
+      message = "You can reserve this listing only for the period #{listing.availability_from} - #{listing.availability_to}"
+      path = reserve_listing_url params[:reservation][:listing_id]
     else
       if @reservation.save
-        redirect_to(@reservation, :notice => 'Reservation was successfully created.') 
+        message = "Reservation was successfully created."
+        path = @reservation  
       else
-        flash[:notice] = @reservation.errors.full_messages.to_sentence
-        redirect_to(reserve_listing_url params[:reservation][:listing_id])
+        message = @reservation.errors.full_messages.to_sentence
+        path = reserve_listing_url params[:reservation][:listing_id]
       end
     end
+    set_flash_notice message
+    redirect_to path
 
   end
 
   def update
     reservation_from_id
     if @reservation.update_attributes(params[:reservation])
-      redirect_to(@reservation, :notice => 'Reservation was successfully updated.')
+       set_flash_notice 'Reservation was successfully updated.'
+       redirect_to(@reservation)
     else
       render :action => "edit"
     end
@@ -47,9 +51,10 @@ class ReservationsController < ApplicationController
     listing = Listing.find(@reservation.listing_id)
     if Date.today < @reservation.check_in + listing.notice_period 
       @reservation.destroy
-      redirect_to(reservations_url)
+      redirect_to(reservations_path)
     else 
-      redirect_to(@reservation, :notice => "You cannot cancel the reservation. Minimum notice period is #{listing.notice_period} days")
+      set_flash_notice "You cannot cancel the reservation. Minimum notice period is #{listing.notice_period} days"
+      redirect_to(@reservation)
     end
   end
   
@@ -57,5 +62,9 @@ class ReservationsController < ApplicationController
   def reservation_from_id
     @reservation = Reservation.find(params[:id])
   end 
+
+  def set_flash_notice(message)
+    flash[:notice] = message
+  end
 
 end
