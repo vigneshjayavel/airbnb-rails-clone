@@ -17,9 +17,7 @@
 			<%= content_tag(:div,msg,:id=> "flash_#{name}") %>
 		<% end %>
 		<%= yield %>
-		<footer>
-			<p>&copy; Freshbnb 2013</p>
-		</footer>
+		<%= render "layouts/footer" %>
 	</div> <!--/.container-->
 
 
