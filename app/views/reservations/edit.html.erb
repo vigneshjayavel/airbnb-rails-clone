@@ -2,4 +2,14 @@
 <div class="span5">
   <%= render Listing.find(@reservation.listing_id) %>
 </div>
-<%= render(:partial => "reservation_form_element", :locals => {:reservation => @reservation}) %>
+<% form_for((@reservation), :html => { :class => ""} )do |f| %>
+  <%= f.error_messages %>
+  <fieldset>
+  	<%= render :partial => "reservation_form", :locals => {:f => f} %>
+	  <div class="control-group">
+	  	<div class="controls">
+	  		<%= f.submit 'Update', :class => "btn btn-success" %>
+	  	</div>
+	  </div>
+  </fieldset>
+<% end %>
