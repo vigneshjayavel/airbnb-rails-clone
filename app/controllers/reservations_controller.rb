@@ -1,15 +1,16 @@
 class ReservationsController < ApplicationController
+  before_filter :reservation_from_id, :only => [:show, :edit, :update, :destroy]
 	def index
 		@title = "My reservations"
 		@reservations = current_user.reservations
 	end
 
 	def show
-    reservation_from_id
+
 	end
 
   def edit
-    reservation_from_id
+
   end
 
   def create
@@ -18,13 +19,11 @@ class ReservationsController < ApplicationController
   end
 
   def update
-    reservation_from_id
     result = Reservation.validate_and_update params, @reservation
     flash_and_redirect result
   end
 
   def destroy
-    reservation_from_id
     result = Reservation.validate_and_destroy @reservation
     flash_and_redirect result
   end
