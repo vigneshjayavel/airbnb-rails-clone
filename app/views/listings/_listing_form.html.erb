@@ -1,0 +1,41 @@
+<%= f.error_messages %>
+<p>
+  <%= f.label "Name" %><br />
+  <%= f.text_field :name %>
+</p>
+<p>
+  <%= f.label "Address" %><br />
+  <%= f.text_field :address %>
+</p>
+<p>
+  <%= f.label "Place" %><br />
+  <%= f.text_field :place %>
+</p>
+<p>
+  <%= f.label "Price" %><br />
+  <%= f.text_field :price %>
+</p>
+<p>
+  <%= f.label "Maximum Guests" %><br />
+  <%= f.text_field :maximum_guests %>
+</p>
+<p>
+  <%= f.label "Available From" %><br />
+  <%= f.date_select :availability_from %>
+</p>
+<p>
+  <%= f.label "Available Till" %><br />
+  <%= f.date_select :availability_to %>
+</p>
+<p>
+  <%= f.label "Home Type" %><br />
+  <%= f.select :home_type, get_home_types.map {|value| [value,value]} %>
+</p>
+<p>
+  <%= f.label "Room Type" %><br />
+  <%= f.select :room_type, get_room_types.map {|value| [value,value]} %>
+</p>
+<p>
+  <%= f.label "Notice Period" %><br />
+  <%= f.text_field :notice_period %>
+</p>
